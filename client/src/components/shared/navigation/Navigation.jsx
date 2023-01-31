@@ -32,17 +32,21 @@ const Navigation = () => {
           <img src="/image/Emoji.png" alt="logo" />
           <span className="Text">ChatRoom</span>
         </Link>
-
-        <div className="navRight">
-          <h3>{user.name}</h3>
-          <Link to="/">
-            <img className="avatar" src={user.avatar} alt="user" />
-          </Link>
-          <button className="Logout__Btn" onClick={logoutUser}>
-            Logout
-          </button>
-        </div>
-        {/* {isAuth && <button onClick={logoutUser}>Logout</button>} */}
+        {isAuth && (
+          <div className="navRight">
+            <h3>{user?.name}</h3>
+            {
+              user.avatar && (
+                <Link to="/">
+                <img className="avatar" src={user.avatar} alt="user" />
+              </Link>
+              )
+            }
+            <button className="Logout__Btn" onClick={logoutUser}>
+              Logout
+            </button>
+          </div>
+        )}
       </nav>
     </Navigate>
   );

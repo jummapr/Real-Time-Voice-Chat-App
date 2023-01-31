@@ -14,6 +14,7 @@ import './App.css'
 import { useSelector } from "react-redux";
 import { useLoadingWithRefresh } from "./Hooks/useLoadingWithRefresh";
 import Loader from "./components/shared/Loader/Loader";
+import Rooms from "./pages/Room/Rooms";
 
 const isAuth = false;
 const user = {
@@ -51,6 +52,10 @@ const App = () => {
           <Route
             path="/rooms"
             element={!isAuth ? <IsHome /> : isAuth && !user.activated ? <IsActivated /> : <Room />}
+          />
+          <Route
+            path="/room/:id"
+            element={!isAuth ? <IsHome /> : isAuth && !user.activated ? <IsActivated /> : <Rooms />}
           />
         </Routes>
       </BrowserRouter>

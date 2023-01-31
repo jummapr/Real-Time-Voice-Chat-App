@@ -1,15 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const RoomCard = ({ room }) => {
+  const navigation = useNavigate() 
   return (
     <Room__Card>
-      <div className="card">
+      <div onClick={() => {navigation(`/room/${room.id}`)}} className="Roomcard">
         <h3>{room.topic}</h3>
-        <div className="speakers">
+        <div
+          className={`speakers ${
+            room.speakers.length === 1 ? "singleSpeakers" : ""
+          }`}
+        >
           <div className="avatar">
             {room.speakers.map((speaker) => (
-              <img key={speaker.id} src={speaker.image} alt="speaker" />
+              <img key={speaker.id} src={speaker.avatar.url} alt="speaker" />
             ))}
           </div>
           <div className="names">
@@ -31,19 +37,20 @@ const RoomCard = ({ room }) => {
 };
 
 const Room__Card = styled.div`
-  .card {
+  .Roomcard {
     background: #1d1d1d;
     border-radius: 20px;
-    padding: 30px;
+    padding: 27px;
     /* width: 15rem; */
     /* height: 8rem; */
     cursor: pointer;
     h3 {
-    /* padding: 7px; */
+      /* padding: 7px; */
       font-weight: 700;
       font-size: 16px;
       color: #ffffff;
     }
+
     .speakers {
       display: flex;
       align-items: center;
@@ -78,6 +85,16 @@ const Room__Card = styled.div`
           img {
           }
         }
+      }
+    }
+    .singleSpeakers {
+      .avatar {
+        img {
+          position: initial;
+        }
+      }
+      .names {
+        margin-left: 20px;
       }
     }
     .People__Count {

@@ -1,82 +1,94 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Add__Room from "../../components/Add__Room_Model/Add__Room";
 import RoomCard from "../../components/Room__Card/RoomCard";
+import { getAllRooms } from "../../http";
 
-const rooms = [
-  {
-    id: 1,
-    topic: "Which framework best for frontend ?",
-    speakers: [
-      {
-        id: 1,
-        name: "John Doe",
-        image: "/image/monky.png",
-      },
-      {
-        id: 2,
-        name: "Shawn  Dell",
-        image: "/image/monky.png",
-      },
-    ],
-    totalPeople: 48,
-  },
-  {
-    id: 2,
-    topic: "What’s new in machine learning",
-    speakers: [
-      {
-        id: 1,
-        name: "John Doe",
-        image: "/image/monky.png",
-      },
-      {
-        id: 2,
-        name: "Shawn  Dell",
-        image: "/image/monky.png",
-      },
-    ],
-    totalPeople: 48,
-  },
-  {
-    id: 3,
-    topic: "Why people use stack overflow?",
-    speakers: [
-      {
-        id: 1,
-        name: "John Doe",
-        image: "/image/monky.png",
-      },
-      {
-        id: 2,
-        name: "Shawn  Dell",
-        image: "/image/monky.png",
-      },
-    ],
-    totalPeople: 48,
-  },
-  {
-    id: 3,
-    topic: "Why people use stack overflow?",
-    speakers: [
-      {
-        id: 1,
-        name: "John Doe",
-        image: "/image/monky.png",
-      },
-      {
-        id: 2,
-        name: "Shawn  Dell",
-        image: "/image/monky.png",
-      },
-    ],
-    totalPeople: 48,
-  },
-];
+// const rooms = [
+//   {
+//     id: 1,
+//     topic: "Which framework best for frontend ?",
+//     speakers: [
+//       {
+//         id: 1,
+//         name: "John Doe",
+//         image: "/image/monky.png",
+//       },
+//       {
+//         id: 2,
+//         name: "Shawn  Dell",
+//         image: "/image/monky.png",
+//       },
+//     ],
+//     totalPeople: 48,
+//   },
+//   {
+//     id: 2,
+//     topic: "What’s new in machine learning",
+//     speakers: [
+//       {
+//         id: 1,
+//         name: "John Doe",
+//         image: "/image/monky.png",
+//       },
+//       {
+//         id: 2,
+//         name: "Shawn  Dell",
+//         image: "/image/monky.png",
+//       },
+//     ],
+//     totalPeople: 48,
+//   },
+//   {
+//     id: 3,
+//     topic: "Why people use stack overflow?",
+//     speakers: [
+//       {
+//         id: 1,
+//         name: "John Doe",
+//         image: "/image/monky.png",
+//       },
+//       {
+//         id: 2,
+//         name: "Shawn  Dell",
+//         image: "/image/monky.png",
+//       },
+//     ],
+//     totalPeople: 48,
+//   },
+//   {
+//     id: 3,
+//     topic: "Why people use stack overflow?",
+//     speakers: [
+//       {
+//         id: 1,
+//         name: "John Doe",
+//         image: "/image/monky.png",
+//       },
+//       {
+//         id: 2,
+//         name: "Shawn  Dell",
+//         image: "/image/monky.png",
+//       },
+//     ],
+//     totalPeople: 48,
+//   },
+// ];
 
 const Room = () => {
 
   const [showModel, setShowModel] = useState(false);
+  const [rooms,setRooms] = useState([]);
+
+  useEffect(() => {
+    const fetchRooms = async () =>{
+      const {data} = await getAllRooms();
+      // console.log(data);
+      setRooms(data);
+    }
+
+    fetchRooms();
+  },[])
 
   const OpenModel = () => {
       setShowModel(true);

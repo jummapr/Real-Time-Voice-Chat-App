@@ -13,6 +13,8 @@ export const send_Otp = (data) => api.post("/api/v1/send-otp", data);
 export const VerifyOtp = (data) => api.post("/api/v1/verify-otp", data);
 export const activated = (data) => api.post("/api/v1/activate", data);
 export const logout = () => api.post("/api/v1/logout");
+export const createRoom = (data) => api.post("/api/v1/rooms", data);
+export const getAllRooms = () => api.get("/api/v1/rooms");
 
 // Interceptor
 

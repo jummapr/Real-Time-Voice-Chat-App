@@ -1,5 +1,6 @@
 const activate__controller = require('../controller/activate__controller');
 const auth__controller = require('../controller/auth__controller');
+const Rooms__controller = require('../controller/Rooms__controller');
 const auth__middleware = require('../middleware/auth__middleware');
 
 const router = require('express').Router();
@@ -10,5 +11,7 @@ router.post('/api/v1/verify-otp',auth__controller.verifyOtp)
 router.post('/api/v1/activate', auth__middleware ,activate__controller.activate)
 router.get('/api/v1/refresh',auth__controller.refresh);
 router.post('/api/v1/logout',auth__middleware,auth__controller.logout)
+router.post('/api/v1/rooms',auth__middleware,Rooms__controller.create)
+router.get('/api/v1/rooms',auth__middleware,Rooms__controller.index)
 
 module.exports = router
